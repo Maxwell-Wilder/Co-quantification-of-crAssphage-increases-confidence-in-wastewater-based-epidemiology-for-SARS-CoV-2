@@ -1,0 +1,13 @@
+tree_vars<-c(LIST VARIABLES OF INTEREST) #Selecting the variables we want to use in our tree
+
+tree_data<-DATASET[tree_vars] #Select variables of interest from a larger, more complex data frame (represented by “DATASET”)
+
+tree_data<-tree_data[complete.cases(tree_data), ] #CTrees requires complete cases (removal of rows that have missing or incomplete information
+
+tree_data<-as.data.frame.list(tree_data) #Formatting the data for CTrees
+
+alpha_mod<-ctree_control(alpha=0.10) #alpha value can be modified to see relationships of near significance
+
+ct<-ctree(OUTCOME~VARIABLES OF INTEREST,tree_data, control=alpha_mod) #Generate CTree object
+
+plot(ct) #Produce CTree figure to see splits/relationships 
